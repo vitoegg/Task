@@ -2,7 +2,7 @@ name: Signin Task
 
 on:
 
-  workflow_dispatch:
+  #workflow_dispatch:
   
   schedule:
     - cron: '01 16 * * *'
