@@ -52,7 +52,7 @@ if COOKIE:
         result = response_data.get('success')
         
         send_telegram_notification(message)
-        print("Signin Status", result)
+        print("Signin Status:", result)
         
     except json.JSONDecodeError:
         print("Error decoding API response.")
