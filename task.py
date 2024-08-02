@@ -1,21 +1,23 @@
-# -- coding: utf-8 --
 import os
 import sys
 from curl_cffi import requests
 
 COOKIE = os.environ.get("COOKIE", "")
 
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
-TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
-TELEGRAM_API_URL = "https://api.telegram.org"
+telegram_bot_token = os.environ.get("TELEGRAM_BOT_TOKEN","")
+chat_id = os.environ.get("CHAT_ID","")
+telegram_api_url = "https://api.telegram.org"
 
-def send_telegram_message(token, chat_id, message):
-    curl_command = f'curl "{TELEGRAM_API_URL}/bot{token}/sendMessage" -d "chat_id={chat_id}&text={message}"'
-    try:
-        subprocess.run(curl_command, shell=True, check=True)
-        print("Telegram Message Send Successful\n")
-    except subprocess.CalledProcessError as e:
-        print(f"Telegram Message Send Failed: {e}\n")
+def telegram_Bot(token,chat_id,message):
+    url = f'{telegram_api_url}/bot{token}/sendMessage'
+    data = {
+        'chat_id': chat_id,
+        'text': message
+    }
+    r = requests.post(url, json=data)
+    response_data = r.json()
+    msg = response_data['ok']
+    print(f"Signin Task：{msg}\n")
 
 if COOKIE:
     url = f"https://www.nodeseek.com/api/attendance?random=true"
@@ -39,17 +41,18 @@ if COOKIE:
         print(response_data)
         message = response_data.get('message')
         success = response_data.get('success')
-        
+        send("Signin Task", message)
         if success == "true":
             print(message)
-            if TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID:
-                send_telegram_message(TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, message)
+            if telegram_bot_token and chat_id:
+                telegram_Bot(telegram_bot_token, chat_id, message)
         else:
             print(message)
-            if TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID:
-                send_telegram_message(TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, message)
+            if telegram_bot_token and chat_id:
+                telegram_Bot(telegram_bot_token, chat_id, message)
 
     except Exception as e:
         print("Error:", e)
+        print("Response Message:", response.text)
 else:
     print("Set COOKIE First")
