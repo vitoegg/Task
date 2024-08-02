@@ -12,18 +12,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
       
-      - name: Set up Python environment
+      - name: Set up Python Environment
         uses: actions/setup-python@v2
         with:
           python-version: '3.11.8'
 
-      - name: install
+      - name: Install CFFI
         run: pip install requests curl_cffi
 
-      - name: run
+      - name: Run Task
         env:
           COOKIE: ${{ secrets.COOKIE }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
