@@ -2,6 +2,8 @@ name: Signin Task
 
 on:
 
+  workflow_dispatch:
+  
   schedule:
     - cron: '01 16 * * *'
 
@@ -27,3 +29,9 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
         run: python task.py
+
+      - name: Delete Runs
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          retain_days: 0
+          keep_minimum_runs: 0
