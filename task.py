@@ -1,5 +1,7 @@
 import os
 import sys
+import subprocess
+import json
 from curl_cffi import requests
 
 COOKIE = os.environ.get("COOKIE", "")
