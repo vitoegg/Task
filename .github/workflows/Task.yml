@@ -15,7 +15,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
       
-      - name: Set up Python Environment
+      - name: Install Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11.8'
@@ -30,7 +30,7 @@ jobs:
           CHAT_ID: ${{ secrets.CHAT_ID }}
         run: python task.py
         
-      - name: Delete releases and workflows runs
+      - name: Delete Workflow History
         uses: ophub/delete-releases-workflows@main
         with:
             delete_releases: false
