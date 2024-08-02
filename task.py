@@ -3,7 +3,6 @@ import os
 import sys
 from curl_cffi import requests
 
-RANDOM = os.environ.get("RANDOM", "false")
 COOKIE = os.environ.get("COOKIE", "")
 
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
@@ -19,7 +18,7 @@ def send_telegram_message(token, chat_id, message):
         print(f"发送Telegram消息失败: {e}\n")
 
 if COOKIE:
-    url = f"https://www.nodeseek.com/api/attendance?random={RANDOM}"
+    url = f"https://www.nodeseek.com/api/attendance?random=true"
     headers = {
         'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0",
         'sec-ch-ua': "\"Not A(Brand\";v=\"99\", \"Microsoft Edge\";v=\"121\", \"Chromium\";v=\"121\"",
@@ -49,9 +48,8 @@ if COOKIE:
             print(message)
             if TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID:
                 send_telegram_message(TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, message)
-            # 可以在此添加其他通知方式，比如邮件通知等
 
     except Exception as e:
-        print("发生异常:", e)
+        print("Error:", e)
 else:
-    print("请先设置COOKIE")
+    print("Set COOKIE First")
