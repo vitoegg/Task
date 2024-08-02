@@ -1,9 +1,7 @@
 name: Signin Task
 
 on:
-  push:
-    branches:
-      - main
+
   schedule:
     - cron: '01 16 * * *'
 
