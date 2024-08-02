@@ -24,9 +24,9 @@ def send_telegram_notification(message):
     ]
     try:
         result = subprocess.run(curl_command, capture_output=True, text=True)
-        print(f"Telegram push result: {result.stdout}")
+        print("Telegram notification sent.")
     except Exception as e:
-        print(f"Error sending Telegram notification: {e}")
+        print("Error sending Telegram notification")
 
 if COOKIE:
     url = f"https://www.nodeseek.com/api/attendance?random=true"
@@ -53,10 +53,11 @@ if COOKIE:
         success = response_data.get('success')
         
         send_telegram_notification(message)
-        print(message)
-
+        print("Operation completed.")
+        
+    except json.JSONDecodeError:
+        print("Error decoding API response.")
     except Exception as e:
-        print(f"An error occurred: {e}")
-        print(f"Actual response content: {result.stdout}")
+        print("An error occurred during the operation.")
 else:
-    print("Please set the Cookie first")
+    print("Cookie not set. Please configure the environment variable.")
