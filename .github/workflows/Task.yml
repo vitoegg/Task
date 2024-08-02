@@ -30,10 +30,10 @@ jobs:
           CHAT_ID: ${{ secrets.CHAT_ID }}
         run: python task.py
         
-      - name: Delete workflow runs
-        uses: Mattraks/delete-workflow-runs@v2
+      - name: Delete releases and workflows runs
+        uses: ophub/delete-releases-workflows@main
         with:
-          token: ${{ secrets.GIT_TOKEN }}
-          repository: vitoegg/Task
-          retain_days: 1
-          keep_minimum_runs: 1
+            delete_releases: false
+            delete_workflows: true
+            workflows_keep_day: 0
+            gh_token: ${{ secrets.GIT_TOKEN }}
