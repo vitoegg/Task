@@ -47,13 +47,17 @@ if COOKIE:
     try:
         response = requests.post(url, headers=headers)
         response_data = response.json()
-        print(response_data)
         
         message = response_data.get('message')
         success = response_data.get('success')
-        
+
         send_telegram_notification(message)
-        print("Operation completed.")
+        
+        if success == "true":
+        print(Signin Successful)
+
+        else
+        print(message)
         
     except json.JSONDecodeError:
         print("Error decoding API response.")
