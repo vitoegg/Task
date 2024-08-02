@@ -13,9 +13,9 @@ def send_telegram_message(token, chat_id, message):
     curl_command = f'curl "{TELEGRAM_API_URL}/bot{token}/sendMessage" -d "chat_id={chat_id}&text={message}"'
     try:
         subprocess.run(curl_command, shell=True, check=True)
-        print("Telegram消息发送成功\n")
+        print("Telegram Message Send Successful\n")
     except subprocess.CalledProcessError as e:
-        print(f"发送Telegram消息失败: {e}\n")
+        print(f"Telegram Message Send Failed: {e}\n")
 
 if COOKIE:
     url = f"https://www.nodeseek.com/api/attendance?random=true"
