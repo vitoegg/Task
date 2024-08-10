@@ -4,8 +4,8 @@ on:
 
   #workflow_dispatch:
   
-  schedule:
-    - cron: '01 16 * * *'
+  #schedule:
+  #  - cron: '01 16 * * *'
 
 jobs:
   Run-Signin-Task:
